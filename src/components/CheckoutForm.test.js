@@ -32,7 +32,21 @@ test("form shows success message on submit with form details", () => {
    userEvent.type(zipInput, "33125");
    userEvent.click(checkoutButton);
 
-   const succesMeassage = screen.getByText(/You have ordered some plants! Woo-hoo!/i);
+   const successDiv = screen.queryByTestId(/successmessage/i);
+   const messageFirstName = screen.getByText(/rodolfo/i)
+   const messageLastName = screen.getByText(/jaspe/i)
+   const messageAddress = screen.getByText(/95 nw 30th ave/i)
+   const messageCity = screen.getByText(/Miami/i)
+   const messageState = screen.getByText(/FL/i)
+   const messageZip = screen.getByText(/rodolfo/i)
 
-   expect(succesMeassage).toBeInTheDocument();
+   
+   expect(successDiv).toHaveTextContent(/You have ordered some plants! Woo-hoo! /i)
+   expect(messageFirstName).toBeVisible();
+   expect(messageLastName).toBeInTheDocument();
+   expect(messageAddress).toBeVisible();
+   expect(messageCity).toBeTruthy();
+   expect(messageState).toBeInTheDocument();
+   expect(messageZip).toBeVisible();
+
 });
